@@ -11,14 +11,28 @@ function getPlayerChoice() {
   return pChoice;
 }
 
-// function to play one round
-function playOneRound(pChoice, cChoice) {
+// score function
+function result(Pscore, Cscore) {
+  if (Pscore > Cscore) {
+    console.log(`Your score : ${Pscore} | Computer score : ${Cscore}`);
+    console.log("You Won");
+  } else if (Pscore < Cscore) {
+    console.log(`Your score : ${Pscore} | Computer score : ${Cscore}`);
+    console.log("You Lost!");
+  } else if (Pscore === Cscore) {
+    console.log(`Your score : ${Pscore} | Computer score : ${Cscore}`);
+    console.log("Tie!!");
+  }
+}
+
+// playing function
+function play(pChoice, cChoice) {
   // Choices :
   if (pChoice === "rock" || pChoice === "paper" || pChoice === "scissors") {
-    console.log(`Your choice : ${pChoice}`);
+    console.log(`\nYour choice : ${pChoice}`);
     console.log(`Computer's choice : ${cChoice}`);
   } else {
-    console.log(`wrong choice : ${pChoice}`);
+    console.log(`\nwrong choice : ${pChoice}`);
     console.log("you can only choose between : * rock | paper | scissors *");
   }
   // Result :
@@ -34,14 +48,21 @@ function playOneRound(pChoice, cChoice) {
     (pChoice === "scissors" && cChoice === "paper")
   ) {
     console.log(`You won, ${pChoice} beats  ${cChoice}`);
+    return (Pscore += 1);
   } else if (
     (pChoice === "scissors" && cChoice === "rock") ||
     (pChoice === "paper" && cChoice === "scissors") ||
     (pChoice === "rock" && cChoice === "paper")
   ) {
     console.log(`You lost, ${cChoice} beats ${pChoice}`);
+    return (Cscore += 1);
   }
 }
 
 // run the game
-playOneRound(getPlayerChoice(), getComputerChoice());
+let Pscore = 0;
+let Cscore = 0;
+for (i = 1; i <= 5; i++) {
+  play(getPlayerChoice(), getComputerChoice());
+}
+result(Pscore, Cscore);
